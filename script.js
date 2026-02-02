@@ -314,9 +314,83 @@ function createPrintHTML(ticketData) {
 
 // Update printTicket function
 function printTicket(ticketData) {
-    const printWindow = window.open('', '_blank');
-    printWindow.document.write(createPrintHTML(ticketData));
-    printWindow.document.close();
+    // 1. Crear el HTML del ticket usando tu función existente
+    const ticketHTML = createTicketHTML(ticketData);
+    
+    // 2. Crear un elemento temporal para el ticket
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = ticketHTML;
+    const ticketElement = tempDiv.querySelector('.ticket');
+    
+    // 3. Configurar el estilo específico para impresión
+    ticketElement.style.cssText = `
+        width: 85mm !important;
+        min-height: 280px !important;
+        padding: 15px !important;
+        font-family: 'Courier New', monospace !important;
+        font-size: 14px !important;
+        margin: 0 auto !important;
+        background: white !important;
+        border: 1px solid #000 !important;
+    `;
+    
+    // 4. Usar Print.js para imprimir
+    printJS({
+        printable: ticketElement.innerHTML,
+        type: 'raw-html',
+        style: `
+            .business-name { 
+                font-size: 20px !important; 
+                font-weight: bold !important; 
+                text-align: center !important;
+                margin-bottom: 8px !important;
+                text-transform: uppercase !important;
+            }
+            .ticket-header { 
+                text-align: center !important;
+                border-bottom: 1px dashed #000 !important;
+                padding-bottom: 10px !important;
+                margin-bottom: 15px !important;
+            }
+            .description-row {
+                text-align: center !important;
+                margin-bottom: 15px !important;
+                padding-bottom: 8px !important;
+                border-bottom: 1px solid #ccc !important;
+                font-weight: bold !important;
+            }
+            .ticket-row {
+                display: flex !important;
+                justify-content: space-between !important;
+                margin-bottom: 8px !important;
+                padding-bottom: 4px !important;
+                border-bottom: 1px dotted #ccc !important;
+            }
+            .ticket-total {
+                border-top: 2px solid #000 !important;
+                margin-top: 15px !important;
+                padding-top: 10px !important;
+                font-weight: bold !important;
+                font-size: 16px !important;
+            }
+            .ticket-footer {
+                text-align: center !important;
+                margin-top: 20px !important;
+                padding-top: 15px !important;
+                border-top: 1px dashed #000 !important;
+                font-size: 13px !important;
+            }
+            .footer-thankyou {
+                font-size: 15px !important;
+                font-weight: bold !important;
+                margin: 10px 0 !important;
+            }
+        `,
+        documentTitle: `Ticket_${ticketData.trans}`,
+        onPrintDialogClose: function() {
+            console.log('Diálogo de impresión cerrado');
+        }
+    });
 }
 
 // Form submission handler
