@@ -11,13 +11,21 @@
     <div class="container">
         <header>
             <h1>Chicho's Anime Store</h1>
-            <p class="subtitle">Professional Ticket System V1.0</p>
+            <p class="subtitle">Professional Ticket System V5.0</p>
         </header>
 
         <main>
             <section class="entry-form">
-                <h2>Capture Sale</h2>
-                <form id="ticketForm">
+                <div class="form-header">
+                    <h2>Capture Sale</h2>
+                    <div class="mode-toggle">
+                        <button type="button" id="singleProductBtn" class="mode-btn active">Single Product</button>
+                        <button type="button" id="multiProductBtn" class="mode-btn">Multiple Products</button>
+                    </div>
+                </div>
+                
+                <!-- Formulario para producto único -->
+                <form id="ticketForm" class="active-form">
                     <div class="form-group">
                         <label for="description">Description:</label>
                         <input type="text" id="description" placeholder="Enter item description" required>
@@ -44,23 +52,72 @@
                         <button type="button" id="resetBtn" class="btn-danger">Reset Form</button>
                     </div>
                 </form>
+
+                <!-- Formulario para productos múltiples -->
+                <form id="multiProductForm" class="hidden-form">
+                    <div class="products-container" id="productsContainer">
+                        <div class="product-item" data-index="0">
+                            <div class="product-header">
+                                <h3>Product 1</h3>
+                                <button type="button" class="remove-product" onclick="removeProduct(0)">×</button>
+                            </div>
+                            <div class="product-row">
+                                <div class="form-group">
+                                    <label>Description:</label>
+                                    <input type="text" class="multi-desc" placeholder="Enter item description" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>MCC:</label>
+                                    <input type="text" class="multi-mcc" placeholder="Ex: 6643E901" required>
+                                </div>
+                            </div>
+                            <div class="product-row">
+                                <div class="form-group">
+                                    <label>Item#:</label>
+                                    <input type="text" class="multi-item" placeholder="Ex: 654182" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Price ($):</label>
+                                    <input type="number" class="multi-price" step="0.01" min="0" placeholder="149.99" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Qty:</label>
+                                    <input type="number" class="multi-qty" min="1" value="1" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions multi-actions">
+                        <button type="button" id="addProductBtn" class="btn-secondary">+ Add Product</button>
+                        <button type="button" id="generateMultiBtn" class="btn-primary">Generate Multi-Product Ticket</button>
+                        <button type="button" id="printMultiBtn" class="btn-secondary">Print Preview</button>
+                        <button type="button" id="resetMultiBtn" class="btn-danger">Reset All</button>
+                    </div>
+                </form>
             </section>
 
             <section class="preview-section">
-                <h2>Ticket Preview</h2>
+                <h2>Ticket Preview (58mm Format)</h2>
                 <div class="ticket-preview" id="ticketPreview">
                     <p class="preview-placeholder">Enter data to see ticket preview</p>
                 </div>
+                <div class="print-status" id="printStatus"></div>
             </section>
         </main>
 
         <footer>
-            <p>Chicho's Anime Store &copy; 2024 | Professional POS System</p>
+            <p>Chicho's Anime Store &copy; 2024 | Optimized for MP210 58mm Printer</p>
         </footer>
     </div>
 
+    <!-- Para convertir HTML a imagen -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <!-- Para imprimir imágenes -->
     <link rel="stylesheet" href="https://printjs-4de6.kxcdn.com/print.min.css">
     <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+    
     <script src="script.js"></script>
 </body>
 </html>

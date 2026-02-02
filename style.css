@@ -14,7 +14,7 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
     background: white;
     border-radius: 15px;
@@ -44,20 +44,59 @@ h1 {
     font-weight: 300;
 }
 
-/* Form */
-.entry-form {
-    padding: 30px;
-    border-bottom: 2px solid #eee;
+/* Form Header */
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.mode-toggle {
+    display: flex;
+    gap: 10px;
+    background: #f1f5f9;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.mode-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: #64748b;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mode-btn.active {
+    background: #3498db;
+    color: white;
+}
+
+.mode-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+
+/* Formularios */
+.active-form {
+    display: block;
+}
+
+.hidden-form {
+    display: none;
 }
 
 h2 {
     color: #2c3e50;
-    margin-bottom: 25px;
     font-size: 1.6rem;
-    border-left: 5px solid #3498db;
-    padding-left: 15px;
 }
 
+/* Form Groups */
 .form-group {
     margin-bottom: 22px;
     display: flex;
@@ -85,12 +124,77 @@ h2 {
     box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
 }
 
+/* Productos Múltiples */
+.products-container {
+    margin-bottom: 25px;
+}
+
+.product-item {
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-right: 40px; /* Espacio para el botón */
+}
+
+.product-header h3 {
+    color: #2c3e50;
+    font-size: 1.2rem;
+    flex-grow: 1;
+}
+
+
+.remove-product {
+    background: #ef4444;
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px; /* Esquinas redondeadas en lugar de círculo */
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 0;
+    flex-shrink: 0;
+    margin-left: 10px;
+}
+
+.remove-product:hover {
+    background: #dc2626;
+    transform: scale(1.05);
+}
+
+.product-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
 /* Buttons */
 .form-actions {
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
     margin-top: 30px;
+}
+
+.multi-actions {
+    margin-top: 20px;
 }
 
 button {
@@ -147,12 +251,13 @@ button {
     background: #f8f9fa;
     border: 2px dashed #3498db;
     border-radius: 10px;
-    padding: 30px;
+    padding: 20px;
     min-height: 400px;
     font-family: 'Courier New', monospace;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: auto;
 }
 
 .preview-placeholder {
@@ -163,29 +268,53 @@ button {
     font-size: 1.1rem;
 }
 
-/* TICKET - LONGER VERSION (85mm width, taller) */
-/* TICKET - LONGER VERSION (85mm width, taller) */
+.print-status {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 500;
+    display: none;
+}
+
+.print-status.success {
+    background: #d1fae5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+    display: block;
+}
+
+.print-status.error {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+    display: block;
+}
+
+/* TICKET - OPTIMIZED FOR 58mm PRINTER (LONGER VERSION) */
 .ticket {
     background: white;
     border: 2px solid #333;
-    padding: 25px;
+    padding: 15px;  /* Más padding */
     font-family: 'Courier New', monospace;
-    font-size: 15px;
+    font-size: 13px; /* Un poco más grande */
     line-height: 1.5;
-    width: 85mm;
-    min-height: 300px;
+    width: 58mm;
+    min-height: 350px; /* Más alto */
     margin: 0 auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
 }
 
 .ticket-header {
     text-align: center;
-    border-bottom: 2px dashed #333;
-    padding-bottom: 15px;
-    margin-bottom: 20px;
+    border-bottom: 2px dashed #333; /* Más grueso */
+    padding-bottom: 12px;
+    margin-bottom: 15px;
 }
 
 .business-name {
-    font-size: 22px; /* Increased from 20px */
+    font-size: 18px; /* Más grande */
     font-weight: bold;
     margin-bottom: 8px;
     text-transform: uppercase;
@@ -194,53 +323,148 @@ button {
 
 .description-row {
     text-align: center;
-    margin-bottom: 18px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #ccc;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ccc; /* Más visible */
     font-weight: bold;
-    font-size: 16px;
+    font-size: 14px;
     min-height: 25px;
 }
 
 .ticket-row {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 12px;
-    padding-bottom: 8px;
+    margin-bottom: 10px; /* Más espacio entre filas */
+    padding-bottom: 8px; /* Más padding */
     border-bottom: 1px solid #eee;
-    min-height: 25px;
+    min-height: 22px; /* Más alto */
 }
 
 .ticket-total {
-    border-top: 3px solid #333;
-    margin-top: 20px;
-    padding-top: 15px;
+    border-top: 3px solid #333; /* Más grueso */
+    margin-top: 20px; /* Más margen */
+    padding-top: 15px; /* Más padding */
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px; /* Más grande */
 }
 
 .ticket-footer {
     text-align: center;
-    margin-top: 25px;
-    padding-top: 20px;
-    border-top: 2px dashed #333;
-    font-size: 14px; /* Increased from 13px */
+    margin-top: 25px; /* Más margen */
+    padding-top: 15px; /* Más padding */
+    border-top: 2px dashed #333; /* Más visible */
+    font-size: 13px; /* Un poco más grande */
     line-height: 1.6;
     letter-spacing: 0.5px;
 }
 
 .footer-thankyou {
-    font-size: 16px; /* Larger for thank you */
+    font-size: 15px; /* Más grande */
     font-weight: bold;
-    margin: 10px 0;
+    margin: 12px 0; /* Más margen */
     text-transform: uppercase;
 }
 
+/* Productos en ticket - MÁS ESPACIO */
+.product-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px; /* Más espacio */
+    font-size: 12px; /* Un poco más grande */
+    line-height: 1.4;
+}
+
+.product-name {
+    flex: 2;
+    text-align: left;
+    word-break: break-word;
+    padding-right: 5px;
+}
+
+.product-details {
+    flex: 1;
+    text-align: right;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.product-subtotal {
+    font-weight: bold;
+    border-top: 1px solid #ccc; /* Más visible */
+    padding-top: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px; /* Más espacio */
+    font-size: 12px;
+    text-align: right;
+    padding-right: 5px;
+}
+
+/* Clase especial para impresión */
+.ticket-printable {
+    width: 58mm !important;
+    min-height: 380px !important; /* Más alto para impresión */
+    padding: 15px !important;
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    background: white !important;
+    border: 2px solid #000 !important;
+    margin: 0 !important;
+}
+
+/* Para múltiples productos con mejor separación */
+.multi-product-section {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #ccc;
+}
+
+.product-header-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-weight: bold;
+    background: #f5f5f5;
+    padding: 3px 5px;
+    border-radius: 3px;
+}
+
+/* Para el área de preview en pantalla */
+.ticket-preview {
+    background: #f8f9fa;
+    border: 2px dashed #3498db;
+    border-radius: 10px;
+    padding: 20px;
+    min-height: 450px; /* Más alto el preview */
+    font-family: 'Courier New', monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+}
+
+/* Mejorar el placeholder */
+.preview-placeholder {
+    color: #7f8c8d;
+    text-align: center;
+    font-style: italic;
+    padding: 100px 0; /* Más padding */
+    font-size: 1.2rem; /* Más grande */
+}
 /* Responsive */
 @media (max-width: 768px) {
     .container {
         margin: 10px;
         border-radius: 10px;
+    }
+    
+    .form-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .mode-toggle {
+        width: 100%;
+        justify-content: center;
     }
     
     .form-actions {
@@ -258,30 +482,83 @@ button {
     
     .ticket {
         width: 95%;
-        padding: 20px;
-        font-size: 14px;
+        padding: 15px;
+        font-size: 11px;
     }
     
     .ticket-preview {
-        padding: 20px;
+        padding: 15px;
         min-height: 350px;
+        overflow-x: auto;
+    }
+    
+    .product-row {
+        grid-template-columns: 1fr;
     }
 }
 
+/* Estilos específicos para impresión */
 @media print {
-    body * {
-        visibility: hidden;
+    body {
+        margin: 0;
+        padding: 0;
+        background: white !important;
     }
-    .ticket, .ticket * {
-        visibility: visible;
+    
+    .container {
+        display: none;
     }
-    .ticket {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 85mm;
-        min-height: 280px;
-        max-width: none;
-        border: 1px solid #000;
+    
+    .ticket-printable {
+        width: 58mm !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 10px !important;
+        border: none !important;
+        box-shadow: none !important;
     }
+}
+
+/* Para la imagen generada */
+.ticket-image {
+    max-width: 58mm;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+/* Controles de zoom para preview */
+.preview-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.zoom-btn {
+    padding: 8px 15px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.zoom-btn:hover {
+    background: #2980b9;
+}
+
+.ticket-preview-container {
+    max-height: 500px;
+    overflow: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f8f9fa;
+}
+
+/* Permite zoom en el preview */
+.ticket-preview {
+    transform-origin: top center;
+    transition: transform 0.3s ease;
 }
