@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chicho's Anime Store - Ticket System</title>
+    <title>Chicho's Anime Store - Ticket System V4.0</title>
     <link rel="icon" href="Logo.jpeg" type="image/jpeg">
-    <link rel="stylesheet" href="style.css">
+    <!-- VERSION FORCING -->
+    <link rel="stylesheet" href="style.css?v=4.0">
 </head>
 <body>
     <div class="container">
         <header>
             <h1>Chicho's Anime Store</h1>
-            <p class="subtitle">Professional Ticket System V4.0</p>
+            <p class="subtitle">Professional Ticket System V4.0 - Optimized for MP210 58mm</p>
         </header>
 
         <main>
@@ -24,7 +25,6 @@
                     </div>
                 </div>
                 
-                <!-- Formulario para producto único -->
                 <form id="ticketForm" class="active-form">
                     <div class="form-group">
                         <label for="description">Description:</label>
@@ -53,7 +53,6 @@
                     </div>
                 </form>
 
-                <!-- Formulario para productos múltiples -->
                 <form id="multiProductForm" class="hidden-form">
                     <div class="products-container" id="productsContainer">
                         <div class="product-item" data-index="0">
@@ -111,13 +110,10 @@
         </footer>
     </div>
 
-    <!-- Para convertir HTML a imagen -->
+    <!-- VERSION FORCING -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    
-    <!-- Para imprimir imágenes -->
     <link rel="stylesheet" href="https://printjs-4de6.kxcdn.com/print.min.css">
     <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
-    
-    <script src="script.js"></script>
+    <script src="script.js?v=4.0"></script>
 </body>
 </html>
