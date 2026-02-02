@@ -202,7 +202,7 @@ function createPrintHTML(ticketData) {
                 body {
                     font-family: 'Courier New', monospace;
                     font-size: 15px;
-                    width: 85mm;
+                    width: 60mm;
                     margin: 0;
                     padding: 3mm;
                 }
@@ -261,7 +261,7 @@ function createPrintHTML(ticketData) {
                 @media print {
                     @page {
                         margin: 0;
-                        size: 85mm auto;
+                        size: 60mm auto;
                     }
                     body {
                         margin: 0;
@@ -324,7 +324,7 @@ function printTicket(ticketData) {
     
     // 3. Configurar el estilo específico para impresión
     ticketElement.style.cssText = `
-        width: 85mm !important;
+        width: 60mm !important;
         min-height: 280px !important;
         padding: 15px !important;
         font-family: 'Courier New', monospace !important;
