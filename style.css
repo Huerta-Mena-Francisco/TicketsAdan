@@ -1,0 +1,287 @@
+/* Reset and base configuration */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Header */
+header {
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+    color: white;
+    padding: 25px;
+    text-align: center;
+    border-bottom: 5px solid #e74c3c;
+}
+
+h1 {
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+/* Form */
+.entry-form {
+    padding: 30px;
+    border-bottom: 2px solid #eee;
+}
+
+h2 {
+    color: #2c3e50;
+    margin-bottom: 25px;
+    font-size: 1.6rem;
+    border-left: 5px solid #3498db;
+    padding-left: 15px;
+}
+
+.form-group {
+    margin-bottom: 22px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #34495e;
+    font-size: 1rem;
+}
+
+.form-group input {
+    padding: 14px 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+/* Buttons */
+.form-actions {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+button {
+    padding: 16px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+    min-width: 180px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #229954 0%, #27ae60 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(135deg, #2980b9 0%, #1f639b 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: white;
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+}
+
+/* Preview section */
+.preview-section {
+    padding: 30px;
+}
+
+.ticket-preview {
+    background: #f8f9fa;
+    border: 2px dashed #3498db;
+    border-radius: 10px;
+    padding: 30px;
+    min-height: 400px;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.preview-placeholder {
+    color: #7f8c8d;
+    text-align: center;
+    font-style: italic;
+    padding: 80px 0;
+    font-size: 1.1rem;
+}
+
+/* TICKET - LONGER VERSION (85mm width, taller) */
+/* TICKET - LONGER VERSION (85mm width, taller) */
+.ticket {
+    background: white;
+    border: 2px solid #333;
+    padding: 25px;
+    font-family: 'Courier New', monospace;
+    font-size: 15px;
+    line-height: 1.5;
+    width: 85mm;
+    min-height: 300px;
+    margin: 0 auto;
+}
+
+.ticket-header {
+    text-align: center;
+    border-bottom: 2px dashed #333;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.business-name {
+    font-size: 22px; /* Increased from 20px */
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.description-row {
+    text-align: center;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
+    font-size: 16px;
+    min-height: 25px;
+}
+
+.ticket-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+    min-height: 25px;
+}
+
+.ticket-total {
+    border-top: 3px solid #333;
+    margin-top: 20px;
+    padding-top: 15px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.ticket-footer {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 2px dashed #333;
+    font-size: 14px; /* Increased from 13px */
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+}
+
+.footer-thankyou {
+    font-size: 16px; /* Larger for thank you */
+    font-weight: bold;
+    margin: 10px 0;
+    text-transform: uppercase;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        margin: 10px;
+        border-radius: 10px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    button {
+        width: 100%;
+        padding: 14px 20px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .ticket {
+        width: 95%;
+        padding: 20px;
+        font-size: 14px;
+    }
+    
+    .ticket-preview {
+        padding: 20px;
+        min-height: 350px;
+    }
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    .ticket, .ticket * {
+        visibility: visible;
+    }
+    .ticket {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 85mm;
+        min-height: 280px;
+        max-width: none;
+        border: 1px solid #000;
+    }
+}

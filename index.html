@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chicho's Anime Store - Ticket System</title>
+    <link rel="icon" href="Logo.jpeg" type="image/jpeg">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Chicho's Anime Store</h1>
+            <p class="subtitle">Professional Ticket System</p>
+        </header>
+
+        <main>
+            <section class="entry-form">
+                <h2>Capture Sale</h2>
+                <form id="ticketForm">
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <input type="text" id="description" placeholder="Enter item description" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="mcc">MCC:</label>
+                        <input type="text" id="mcc" placeholder="Ex: 6643E901" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="itemNumber">Item#:</label>
+                        <input type="text" id="itemNumber" placeholder="Ex: 654182" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subtotal">Sub-total ($):</label>
+                        <input type="number" id="subtotal" step="0.01" min="0" placeholder="149.99" required>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Generate Ticket</button>
+                        <button type="button" id="printPreviewBtn" class="btn-secondary">Print Preview</button>
+                        <button type="button" id="resetBtn" class="btn-danger">Reset Form</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="preview-section">
+                <h2>Ticket Preview</h2>
+                <div class="ticket-preview" id="ticketPreview">
+                    <p class="preview-placeholder">Enter data to see ticket preview</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Chicho's Anime Store &copy; 2024 | Professional POS System</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
