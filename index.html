@@ -5,169 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chicho's Anime Store - Ticket System</title>
     <link rel="icon" href="Logo.jpeg" type="image/jpeg">
-    <link rel="stylesheet" href="https://printjs-4de6.kxcdn.com/print.min.css">
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* ESTILOS DEL LOGIN */
-        .login-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        .login-box {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            text-align: center;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .login-logo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            object-fit: cover;
-            border: 4px solid #3498db;
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
-        }
-
-        .login-title {
-            color: #2c3e50;
-            margin-bottom: 5px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .login-subtitle {
-            color: #7f8c8d;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-        }
-
-        .login-developer {
-            color: #3498db;
-            margin-bottom: 30px;
-            font-size: 0.9rem;
-            font-style: italic;
-        }
-
-        .login-input {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .login-input:focus {
-            outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .login-btn:hover {
-            background: linear-gradient(135deg, #229954 0%, #27ae60 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
-        }
-
-        .login-error {
-            color: #e74c3c;
-            margin-top: 15px;
-            font-size: 0.9rem;
-            display: none;
-        }
-
-        .login-note {
-            color: #f39c12;
-            font-size: 0.8rem;
-            margin-top: 10px;
-            font-style: italic;
-        }
-
-        .login-footer {
-            margin-top: 25px;
-            color: #95a5a6;
-            font-size: 0.8rem;
-            border-top: 1px solid #eee;
-            padding-top: 15px;
-        }
-
-        /* Ocultar la app hasta login */
-        .app-container {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
-    <!-- ===== LOGIN SCREEN (se muestra primero) ===== -->
+    <!-- ===== LOGIN ===== -->
     <div id="loginScreen" class="login-screen">
         <div class="login-box">
             <img src="Logo.jpeg" alt="Chicho's Anime Store" class="login-logo">
             <h1 class="login-title">CHICHO'S ANIME STORE</h1>
-            <p class="login-subtitle">Professional Ticket System</p>
-            <p class="login-developer">Developed by: Adan Garcia</p>
+            <p>Professional Ticket System</p>
             
-            <input type="password" 
-                   id="loginPassword" 
-                   placeholder="🔐 Enter access password"
-                   autocomplete="off"
-                   class="login-input"
-                   onkeypress="if(event.key === 'Enter') verifyLogin()">
+            <input type="password" id="loginPassword" placeholder="🔐 Enter password" class="login-input">
             
-            <button onclick="verifyLogin()" class="login-btn">
-                🚀 ENTER SYSTEM
-            </button>
+            <button id="loginButton" class="login-btn">🚀 ENTER SYSTEM</button>
             
-            <div id="errorMessage" class="login-error">
-                ❌ Incorrect password. Try again.
-            </div>
-            
-            <div class="login-note">
-                Only authorized personnel can access
-            </div>
-            
-            <div class="login-footer">
-                Restricted Access • Secure Offline System
-            </div>
+            <div id="errorMessage" class="login-error">❌ Incorrect password</div>
         </div>
     </div>
 
-    <!-- ===== APP CONTENT (oculto hasta login) ===== -->
+    <!-- ===== APP ===== -->
     <div class="app-container" id="appContent">
         <div class="container">
             <header>
@@ -177,22 +34,31 @@
             </header>
 
             <main>
-                <section class="entry-form">
-                    <h2>Capture Sale</h2>
-                    <form id="ticketForm">
+                <!-- Selector de modo -->
+                <div class="mode-selector">
+                    <button id="singleProductBtn" class="mode-btn active">🛒 Single Product</button>
+                    <button id="multiProductBtn" class="mode-btn">📦 Multiple Products</button>
+                </div>
+
+                <!-- Formulario Simple -->
+                <section class="entry-form active-form" id="ticketForm">
+                    <h2>Single Product Sale</h2>
+                    <div class="form-container">
                         <div class="form-group">
                             <label for="description">Description:</label>
                             <input type="text" id="description" placeholder="Enter item description" required>
                         </div>
                         
-                        <div class="form-group">
-                            <label for="mcc">MCC:</label>
-                            <input type="text" id="mcc" placeholder="Ex: 6643E901" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="itemNumber">Item#:</label>
-                            <input type="text" id="itemNumber" placeholder="Ex: 654182" required>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="mcc">MCC:</label>
+                                <input type="text" id="mcc" placeholder="Ex: 6643E901" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="itemNumber">Item#:</label>
+                                <input type="text" id="itemNumber" placeholder="Ex: 654182" required>
+                            </div>
                         </div>
                         
                         <div class="form-group">
@@ -201,17 +67,31 @@
                         </div>
 
                         <div class="form-actions">
-                            <button type="submit" class="btn-primary">Generate Ticket</button>
-                            <button type="button" id="printPreviewBtn" class="btn-secondary">Print Preview</button>
-                            <button type="button" id="resetBtn" class="btn-danger">Reset Form</button>
+                            <button id="generateTicketBtn" class="btn-primary">🎫 Generate Ticket Image</button>
+                            <button id="resetBtn" class="btn-danger">🔄 Reset Form</button>
                         </div>
-                    </form>
+                    </div>
                 </section>
 
+                <!-- Formulario Múltiple -->
+                <section class="entry-form hidden-form" id="multiProductForm">
+                    <h2>Multiple Products Sale</h2>
+                    <div class="products-container" id="productsContainer">
+                        <!-- Productos dinámicos -->
+                    </div>
+                    
+                    <div class="multi-actions">
+                        <button id="addProductBtn" class="btn-secondary">➕ Add Product</button>
+                        <button id="generateMultiBtn" class="btn-primary">🎫 Generate Multi Ticket</button>
+                        <button id="resetMultiBtn" class="btn-danger">🔄 Reset All</button>
+                    </div>
+                </section>
+
+                <!-- Preview -->
                 <section class="preview-section">
-                    <h2>Ticket Preview</h2>
+                    <h2>Ticket Image Preview</h2>
                     <div class="ticket-preview" id="ticketPreview">
-                        <p class="preview-placeholder">Enter data to see ticket preview</p>
+                        <p class="preview-placeholder">Ticket image will appear here</p>
                     </div>
                 </section>
             </main>
@@ -222,55 +102,22 @@
         </div>
     </div>
 
-    <!-- ===== SCRIPTS ===== -->
-    <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+    <!-- Modal para imprimir -->
+    <div id="printModal" class="print-modal">
+        <div class="print-modal-content">
+            <h3>🎫 Ticket Ready to Print</h3>
+            <img id="ticketImage" src="" alt="Ticket Image">
+            <div class="print-modal-buttons">
+                <button id="printImageBtn" class="btn-primary">🖨️ Print Image</button>
+                <button id="downloadImageBtn" class="btn-secondary">📥 Download Image</button>
+                <button id="closeModalBtn" class="btn-danger">✕ Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <script>
-        // ===== LOGIN FUNCTION =====
-        function verifyLogin() {
-            const password = document.getElementById('loginPassword').value;
-            const errorDiv = document.getElementById('errorMessage');
-            
-            // PASSWORD: "chicho" (you can change it)
-            if (password === "ChichosAd6869") {
-                // Hide login screen
-                document.getElementById('loginScreen').style.display = 'none';
-                
-                // Show app content with fade effect
-                const appContent = document.getElementById('appContent');
-                appContent.style.display = 'block';
-                setTimeout(() => {
-                    appContent.style.opacity = '1';
-                }, 10);
-                
-                // Focus first input
-                setTimeout(() => {
-                    document.getElementById('description').focus();
-                }, 300);
-                
-            } else {
-                // Show error
-                errorDiv.style.display = 'block';
-                document.getElementById('loginPassword').value = '';
-                document.getElementById('loginPassword').focus();
-                
-                // Hide error after 3 seconds
-                setTimeout(() => {
-                    errorDiv.style.display = 'none';
-                }, 3000);
-            }
-        }
-
-        // Allow Enter key in password field
-        document.getElementById('loginPassword').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                verifyLogin();
-            }
-        });
-
-        // Simple password hint (optional, remove for production)
-        console.log("Login hint: Password is 'chicho'");
-    </script>
-    <script src="script.js"></script>
+    <script src="login.js"></script>
+    <script src="ticket-system.js"></script>
 </body>
 </html>
