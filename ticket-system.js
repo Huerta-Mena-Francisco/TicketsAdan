@@ -9,6 +9,37 @@ function generateTransactionNumber() {
 }
 
 function getCurrentDateTime() {
+    const customDate = document.getElementById('customDate').value.trim();
+    const customTime = document.getElementById('customTime').value.trim();
+    
+    // Si el usuario ingresó fecha y hora
+    if (customDate && customTime) {
+        return `${customDate} ${customTime}`;
+    }
+    
+    // Si solo ingresó fecha
+    if (customDate) {
+        const now = new Date();
+        const time = now.toLocaleString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true
+        });
+        return `${customDate} ${time}`;
+    }
+    
+    // Si solo ingresó hora
+    if (customTime) {
+        const now = new Date();
+        const date = now.toLocaleDateString('en-US', {
+            month: '2-digit',
+            day: '2-digit',
+            year: 'numeric'
+        });
+        return `${date} ${customTime}`;
+    }
+    
+    // Si no ingresó nada, usar fecha/hora actual
     const now = new Date();
     return now.toLocaleString('en-US', {
         month: '2-digit',
@@ -58,7 +89,8 @@ function addProductItem() {
             <div class="product-row">
                 <div class="form-group">
                     <label>Description:</label>
-                    <input type="text" class="multi-desc" placeholder="Item description" required>
+                    <input type="text" class="multi-desc" placeholder="Item description" maxlength="18" required>
+                    <small style="color: #666; font-size: 0.8rem; display: block; margin-top: 3px;">Max 22 chars</small>
                 </div>
                 <div class="form-group">
                     <label>MCC:</label>
@@ -292,8 +324,8 @@ function createTicketHTML(ticketData, isMulti = false) {
         
         ticketData.products.forEach((product, index) => {
             itemCount += product.quantity;
-            const shortDesc = product.description.length > 20 
-                ? product.description.substring(0, 18) + '..' 
+            const shortDesc = product.description.length > 23 
+                ? product.description.substring(0, 22) + '..' 
                 : product.description;
                 
             productsHTML += `
@@ -360,7 +392,7 @@ function createTicketHTML(ticketData, isMulti = false) {
             </div>
             
             <div style="text-align: center; font-weight: bold; margin: 8px 0; font-size: 12px; padding: 6px 0; border: 1px solid #ccc; background: #f9f9f9;">
-                ${ticketData.description}
+            ${ticketData.description.substring(0, 22)}
             </div>
             
             <div style="margin: 10px 0;">
