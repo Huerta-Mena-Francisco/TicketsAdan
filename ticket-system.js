@@ -89,7 +89,7 @@ function addProductItem() {
             <div class="product-row">
                 <div class="form-group">
                     <label>Description:</label>
-                    <input type="text" class="multi-desc" placeholder="Item description" maxlength="18" required>
+                    <input type="text" class="multi-desc" placeholder="Item description" maxlength="22" required>
                     <small style="color: #666; font-size: 0.8rem; display: block; margin-top: 3px;">Max 22 chars</small>
                 </div>
                 <div class="form-group">
@@ -340,11 +340,13 @@ function createTicketHTML(ticketData, isMulti = false) {
         });
         
         return `
-            <div style="text-align: center; border-bottom: 1px dashed #000; padding-bottom: 8px; margin-bottom: 12px;">
-                <div style="font-weight: bold; font-size: 15px; margin-bottom: 4px;">CHICHO'S ANIME STORE</div>
-                <div style="font-size: 12px; margin-bottom: 3px;">SALES RECEIPT</div>
-                <div style="font-size: 10px;">${ticketData.dateTime}</div>
-            </div>
+        <div style="text-align: center; border-bottom: 1px dashed #000; padding-bottom: 8px; margin-bottom: 12px;">
+        <div style="font-weight: bold; font-size: 15px; margin-bottom: 4px;">CHICHO'S ANIME STORE</div>
+        <div style="font-size: 10px; margin-bottom: 2px;">5660 N Mesa</div>
+        <div style="font-size: 10px; margin-bottom: 3px;">El Paso, TX</div>
+        <div style="font-size: 12px; margin-bottom: 3px;">SALES RECEIPT</div>
+        <div style="font-size: 10px;">${ticketData.dateTime}</div>
+        </div>
             
             <div style="display: flex; justify-content: space-between; margin: 8px 0; font-weight: bold; font-size: 12px;">
                 <span>Trans#:</span>
@@ -380,10 +382,12 @@ function createTicketHTML(ticketData, isMulti = false) {
         `;
     } else {
         return `
-            <div style="text-align: center; border-bottom: 1px dashed #000; padding-bottom: 8px; margin-bottom: 12px;">
-                <div style="font-weight: bold; font-size: 15px; margin-bottom: 4px;">CHICHO'S ANIME STORE</div>
-                <div style="font-size: 12px; margin-bottom: 3px;">SALES RECEIPT</div>
-                <div style="font-size: 10px;">${ticketData.dateTime}</div>
+        <div style="text-align: center; border-bottom: 1px dashed #000; padding-bottom: 8px; margin-bottom: 12px;">
+        <div style="font-weight: bold; font-size: 15px; margin-bottom: 4px;">CHICHO'S ANIME STORE</div>
+        <div style="font-size: 10px; margin-bottom: 2px;">5660 N Mesa</div>
+        <div style="font-size: 10px; margin-bottom: 3px;">El Paso, TX</div>
+        <div style="font-size: 12px; margin-bottom: 3px;">SALES RECEIPT</div>
+        <div style="font-size: 10px;">${ticketData.dateTime}</div>
             </div>
             
             <div style="display: flex; justify-content: space-between; margin: 8px 0; font-weight: bold; font-size: 12px;">
