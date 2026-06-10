@@ -377,8 +377,8 @@
             font-style: italic;
         }
 
-        /* ===== TICKET STYLES ===== */
-        .ticket {
+        /* ===== IDJ STYLES (formerly ticket) ===== */
+        .idj {
             width: 58mm;
             font-family: 'Courier New', monospace;
             font-size: 11px;
@@ -388,7 +388,7 @@
             border: 1px solid #ddd;
         }
 
-        .ticket-header {
+        .idj-header {
             text-align: center;
             border-bottom: 1px dashed #000;
             padding-bottom: 8px;
@@ -406,13 +406,13 @@
             margin: 10px 0;
         }
 
-        .ticket-row {
+        .idj-row {
             display: flex;
             justify-content: space-between;
             margin: 5px 0;
         }
 
-        .ticket-total {
+        .idj-total {
             display: flex;
             justify-content: space-between;
             font-weight: bold;
@@ -422,7 +422,7 @@
             border-top: 2px solid #000;
         }
 
-        .ticket-footer {
+        .idj-footer {
             text-align: center;
             margin-top: 15px;
             padding-top: 10px;
@@ -512,7 +512,7 @@
         <div class="login-box">
             
             <h1 class="login-title">Innovacion y desarrollo de Jrz</h1>
-            <p>Professional Ticket System</p>
+            <p>Professional IDJ System</p>
             
             <input type="password" id="loginPassword" placeholder="🔐 Enter password" class="login-input">
             
@@ -527,7 +527,7 @@
         <div class="container">
             <header>
                 
-                <h1>Tickets</h1>
+                <h1>IDJ System</h1>
                 <p class="subtitle">IyDSJ</p>
             </header>
 
@@ -581,7 +581,7 @@
                         </div>
 
                         <div class="form-actions">
-                            <button id="generateTicketBtn" class="btn-primary">🎫 Generate Ticket Image</button>
+                            <button id="generateTicketBtn" class="btn-primary">🎫 Generate IDJ Image</button>
                             <button id="resetBtn" class="btn-danger">🔄 Reset Form</button>
                         </div>
                     </div>
@@ -593,7 +593,7 @@
                     
                     <!-- SECCIÓN DE FECHA/HORA GLOBAL PARA MÚLTIPLES PRODUCTOS -->
                     <div class="multi-datetime-section">
-                        <h3>📅 Ticket Date & Time (applies to all products)</h3>
+                        <h3>📅 IDJ Date & Time (applies to all products)</h3>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="multiCustomDate">Date (MM/DD/YYYY):</label>
@@ -612,23 +612,23 @@
                     
                     <div class="multi-actions">
                         <button id="addProductBtn" class="btn-secondary">➕ Add Product</button>
-                        <button id="generateMultiBtn" class="btn-primary">🎫 Generate Multi Ticket</button>
+                        <button id="generateMultiBtn" class="btn-primary">🎫 Generate Multi IDJ</button>
                         <button id="resetMultiBtn" class="btn-danger">🔄 Reset All</button>
                     </div>
                 </section>
 
                 <!-- Preview -->
                 <section class="preview-section">
-                    <h2>Ticket Image Preview</h2>
+                    <h2>IDJ Image Preview</h2>
                     <div class="ticket-preview" id="ticketPreview">
-                        <p class="preview-placeholder">Ticket image will appear here</p>
+                        <p class="preview-placeholder">IDJ image will appear here</p>
                     </div>
                     <div id="printStatus" class="print-status"></div>
                 </section>
             </main>
 
             <footer>
-                <p>TickesSol &copy; 2024 | Professional Ticket System</p>
+                <p>IDJ System &copy; 2024 | Professional IDJ System</p>
             </footer>
         </div>
     </div>
@@ -666,7 +666,7 @@
             }
         });
 
-        // ===== TICKET SYSTEM SCRIPT =====
+        // ===== IDJ SYSTEM SCRIPT =====
         const TAX_RATE = 8.25;
         const PAPER_WIDTH = 58;
         let currentMode = 'single';
@@ -833,12 +833,12 @@
             return { products, totalSubtotal };
         }
 
-        function createTicketImageHTML(ticketData, isMulti = false) {
+        function createIDJImageHTML(idjData, isMulti = false) {
             if (isMulti) {
                 let productsHTML = '';
                 let itemCount = 0;
                 
-                ticketData.products.forEach((product, index) => {
+                idjData.products.forEach((product, index) => {
                     itemCount += product.quantity;
                     const shortDesc = product.description.length > 20 
                         ? product.description.substring(0, 18) + '..' 
@@ -860,16 +860,16 @@
                         <div style="text-align: center; border-bottom: 1px dashed #000; padding-bottom: 8px; margin-bottom: 12px;">
                             <div style="font-weight: bold; font-size: 15px; margin-bottom: 4px;">CHICHO'S ANIME STORE</div>
                             <div style="font-size: 12px; margin-bottom: 3px;">SALES RECEIPT</div>
-                            <div style="font-size: 10px;">${ticketData.dateTime}</div>
+                            <div style="font-size: 10px;">${idjData.dateTime}</div>
                         </div>
                         
                         <div style="display: flex; justify-content: space-between; margin: 8px 0; font-weight: bold; font-size: 12px;">
                             <span>Trans#:</span>
-                            <span>${ticketData.trans}</span>
+                            <span>${idjData.trans}</span>
                         </div>
                         
                         <div style="text-align: center; font-weight: bold; margin: 8px 0; font-size: 12px; padding-bottom: 6px; border-bottom: 1px solid #000;">
-                            ${ticketData.products.length} ITEMS (${itemCount} pcs)
+                            ${idjData.products.length} ITEMS (${itemCount} pcs)
                         </div>
                         
                         ${productsHTML}
@@ -877,17 +877,17 @@
                         <div style="border-top: 1px dashed #ccc; margin: 12px 0; padding-top: 10px;">
                             <div style="display: flex; justify-content: space-between; margin: 6px 0;">
                                 <span>Sub-total:</span>
-                                <span>$${ticketData.subtotal.toFixed(2)}</span>
+                                <span>$${idjData.subtotal.toFixed(2)}</span>
                             </div>
                             <div style="display: flex; justify-content: space-between; margin: 6px 0;">
                                 <span>Tax ${TAX_RATE}%:</span>
-                                <span>$${ticketData.tax.toFixed(2)}</span>
+                                <span>$${idjData.tax.toFixed(2)}</span>
                             </div>
                         </div>
                         
                         <div style="border-top: 2px solid #000; margin-top: 15px; padding-top: 12px; display: flex; justify-content: space-between; font-weight: bold; font-size: 14px;">
                             <span>TOTAL:</span>
-                            <span>$${ticketData.total.toFixed(2)}</span>
+                            <span>$${idjData.total.toFixed(2)}</span>
                         </div>
                         
                         <div style="text-align: center; margin-top: 18px; padding-top: 12px; border-top: 1px dashed #000; font-size: 11px; line-height: 1.4;">
@@ -902,43 +902,43 @@
                         <div style="text-align: center; border-bottom: 1px dashed #000; padding-bottom: 8px; margin-bottom: 12px;">
                             <div style="font-weight: bold; font-size: 15px; margin-bottom: 4px;">CHICHO'S ANIME STORE</div>
                             <div style="font-size: 12px; margin-bottom: 3px;">SALES RECEIPT</div>
-                            <div style="font-size: 10px;">${ticketData.dateTime}</div>
+                            <div style="font-size: 10px;">${idjData.dateTime}</div>
                         </div>
                         
                         <div style="display: flex; justify-content: space-between; margin: 8px 0; font-weight: bold; font-size: 12px;">
                             <span>Trans#:</span>
-                            <span>${ticketData.trans}</span>
+                            <span>${idjData.trans}</span>
                         </div>
                         
                         <div style="text-align: center; font-weight: bold; margin: 8px 0; font-size: 12px; padding: 6px 0; border: 1px solid #ccc; background: #f9f9f9;">
-                            ${ticketData.description}
+                            ${idjData.description}
                         </div>
                         
                         <div style="margin: 10px 0;">
                             <div style="display: flex; justify-content: space-between; margin: 6px 0; padding: 4px 0; border-bottom: 1px dotted #eee;">
                                 <span>MCC:</span>
-                                <span>${ticketData.mcc}</span>
+                                <span>${idjData.mcc}</span>
                             </div>
                             <div style="display: flex; justify-content: space-between; margin: 6px 0; padding: 4px 0; border-bottom: 1px dotted #eee;">
                                 <span>Item#:</span>
-                                <span>${ticketData.itemNumber}</span>
+                                <span>${idjData.itemNumber}</span>
                             </div>
                         </div>
                         
                         <div style="border-top: 1px dashed #ccc; margin: 12px 0; padding-top: 10px;">
                             <div style="display: flex; justify-content: space-between; margin: 6px 0;">
                                 <span>Sub-total:</span>
-                                <span>$${ticketData.subtotal.toFixed(2)}</span>
+                                <span>$${idjData.subtotal.toFixed(2)}</span>
                             </div>
                             <div style="display: flex; justify-content: space-between; margin: 6px 0;">
                                 <span>Tax ${TAX_RATE}%:</span>
-                                <span>$${ticketData.tax.toFixed(2)}</span>
+                                <span>$${idjData.tax.toFixed(2)}</span>
                             </div>
                         </div>
                         
                         <div style="border-top: 2px solid #000; margin-top: 15px; padding-top: 12px; display: flex; justify-content: space-between; font-weight: bold; font-size: 14px;">
                             <span>TOTAL:</span>
-                            <span>$${ticketData.total.toFixed(2)}</span>
+                            <span>$${idjData.total.toFixed(2)}</span>
                         </div>
                         
                         <div style="text-align: center; margin-top: 18px; padding-top: 12px; border-top: 1px dashed #000; font-size: 11px; line-height: 1.4;">
@@ -950,12 +950,12 @@
             }
         }
 
-        function createTicketHTML(ticketData, isMulti = false) {
+        function createIDJHTML(idjData, isMulti = false) {
             if (isMulti) {
                 let productsHTML = '';
                 let itemCount = 0;
                 
-                ticketData.products.forEach((product, index) => {
+                idjData.products.forEach((product, index) => {
                     itemCount += product.quantity;
                     const shortDesc = product.description.length > 20 
                         ? product.description.substring(0, 18) + '..' 
@@ -971,46 +971,46 @@
                 });
                 
                 return `
-                    <div class="ticket">
-                        <div class="ticket-header">
-                            <div class="business-name">CHICHO'S ANIME STORE</div>
+                    <div class="idj">
+                        <div class="idj-header">
+                            <div class="business-name">IDSJ</div>
                             <div style="font-size: 12px; margin: 3px 0;">SALES RECEIPT</div>
-                            <div style="font-size: 10px;">${ticketData.dateTime}</div>
+                            <div style="font-size: 10px;">${idjData.dateTime}</div>
                         </div>
                         
                         <div class="separator-line"></div>
                         
                         <div style="text-align: center; font-weight: bold; font-size: 12px; margin: 5px 0;">
-                            ${ticketData.products.length} ITEMS (${itemCount} pcs)
+                            ${idjData.products.length} ITEMS (${itemCount} pcs)
                         </div>
                         
                         ${productsHTML}
                         
                         <div class="separator-line"></div>
                         
-                        <div class="ticket-row">
+                        <div class="idj-row">
                             <span>Transaction:</span>
-                            <span>${ticketData.trans}</span>
+                            <span>${idjData.trans}</span>
                         </div>
                         
-                        <div class="ticket-row">
+                        <div class="idj-row">
                             <span>Sub-total:</span>
-                            <span>$${ticketData.subtotal.toFixed(2)}</span>
+                            <span>$${idjData.subtotal.toFixed(2)}</span>
                         </div>
                         
-                        <div class="ticket-row">
+                        <div class="idj-row">
                             <span>Tax ${TAX_RATE}%:</span>
-                            <span>$${ticketData.tax.toFixed(2)}</span>
+                            <span>$${idjData.tax.toFixed(2)}</span>
                         </div>
                         
-                        <div class="ticket-total">
+                        <div class="idj-total">
                             <span>TOTAL:</span>
-                            <span>$${ticketData.total.toFixed(2)}</span>
+                            <span>$${idjData.total.toFixed(2)}</span>
                         </div>
                         
                         <div class="separator-line"></div>
                         
-                        <div class="ticket-footer">
+                        <div class="idj-footer">
                             <div>Thank you for your purchase!</div>
                             <div style="font-size: 10px; margin-top: 3px;">Chicho's Anime Store</div>
                         </div>
@@ -1018,56 +1018,56 @@
                 `;
             } else {
                 return `
-                    <div class="ticket">
-                        <div class="ticket-header">
-                            <div class="business-name">CHICHO'S ANIME STORE</div>
+                    <div class="idj">
+                        <div class="idj-header">
+                            <div class="business-name">IDSJ</div>
                             <div style="font-size: 12px; margin: 3px 0;">SALES RECEIPT</div>
-                            <div style="font-size: 10px;">${ticketData.dateTime}</div>
+                            <div style="font-size: 10px;">${idjData.dateTime}</div>
                         </div>
                         
                         <div class="separator-line"></div>
                         
                         <div style="text-align: center; font-weight: bold; font-size: 12px; margin: 5px 0;">
-                            ${ticketData.description}
+                            ${idjData.description}
                         </div>
                         
                         <div class="separator-line"></div>
                         
-                        <div class="ticket-row">
+                        <div class="idj-row">
                             <span>Transaction:</span>
-                            <span>${ticketData.trans}</span>
+                            <span>${idjData.trans}</span>
                         </div>
                         
-                        <div class="ticket-row">
+                        <div class="idj-row">
                             <span>MCC:</span>
-                            <span>${ticketData.mcc}</span>
+                            <span>${idjData.mcc}</span>
                         </div>
                         
-                        <div class="ticket-row">
+                        <div class="idj-row">
                             <span>Item#:</span>
-                            <span>${ticketData.itemNumber}</span>
+                            <span>${idjData.itemNumber}</span>
                         </div>
                         
                         <div class="separator-line"></div>
                         
-                        <div class="ticket-row">
+                        <div class="idj-row">
                             <span>Sub-total:</span>
-                            <span>$${ticketData.subtotal.toFixed(2)}</span>
+                            <span>$${idjData.subtotal.toFixed(2)}</span>
                         </div>
                         
-                        <div class="ticket-row">
+                        <div class="idj-row">
                             <span>Tax ${TAX_RATE}%:</span>
-                            <span>$${ticketData.tax.toFixed(2)}</span>
+                            <span>$${idjData.tax.toFixed(2)}</span>
                         </div>
                         
-                        <div class="ticket-total">
+                        <div class="idj-total">
                             <span>TOTAL:</span>
-                            <span>$${ticketData.total.toFixed(2)}</span>
+                            <span>$${idjData.total.toFixed(2)}</span>
                         </div>
                         
                         <div class="separator-line"></div>
                         
-                        <div class="ticket-footer">
+                        <div class="idj-footer">
                             <div>Thank you for your purchase!</div>
                             <div style="font-size: 10px; margin-top: 3px;">Chicho's Anime Store</div>
                         </div>
@@ -1086,7 +1086,7 @@
             }
         }
 
-        function generateTicketData() {
+        function generateIDJData() {
             // Generar automáticos si están vacíos
             generateAutoDataForSingle();
             
@@ -1111,7 +1111,7 @@
             };
         }
 
-        function generateMultiTicketData() {
+        function generateMultiIDJData() {
             const { products, totalSubtotal } = collectMultiProductData();
             const trans = generateTransactionNumber();
             const calculations = calculateTaxAndTotal(totalSubtotal);
@@ -1127,13 +1127,13 @@
             };
         }
 
-        function displayTicketPreview(ticketData, isMulti = false) {
-            ticketPreview.innerHTML = createTicketHTML(ticketData, isMulti);
+        function displayIDJPreview(idjData, isMulti = false) {
+            ticketPreview.innerHTML = createIDJHTML(idjData, isMulti);
         }
 
-        async function generateTicketImage(ticketData, isMulti = false) {
+        async function generateIDJImage(idjData, isMulti = false) {
             try {
-                showStatus('Generating ticket image...', 'info');
+                showStatus('Generating IDJ image...', 'info');
                 
                 const tempDiv = document.createElement('div');
                 tempDiv.style.cssText = `
@@ -1144,7 +1144,7 @@
                     background: white;
                 `;
                 
-                tempDiv.innerHTML = createTicketImageHTML(ticketData, isMulti);
+                tempDiv.innerHTML = createIDJImageHTML(idjData, isMulti);
                 document.body.appendChild(tempDiv);
                 
                 await new Promise(resolve => setTimeout(resolve, 200));
@@ -1171,7 +1171,7 @@
             const modalHTML = `
                 <div id="printOverlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9998;"></div>
                 <div id="printModal" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 10px; z-index: 9999; width: 90%; max-width: 400px; text-align: center;">
-                    <h3 style="margin-bottom: 15px;">Print Ticket #${transNumber}</h3>
+                    <h3 style="margin-bottom: 15px;">Print IDJ #${transNumber}</h3>
                     <img src="${imageUrl}" style="max-width: 100%; max-height: 200px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 20px;">
                     <div style="display: flex; flex-direction: column; gap: 10px;">
                         <button id="downloadBtn" style="padding: 12px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">📥 Download Image</button>
@@ -1186,7 +1186,7 @@
             document.getElementById('downloadBtn').addEventListener('click', () => {
                 const link = document.createElement('a');
                 link.href = imageUrl;
-                link.download = `ticket_${transNumber}.png`;
+                link.download = `idj_${transNumber}.png`;
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
@@ -1198,18 +1198,18 @@
                 try {
                     const response = await fetch(imageUrl);
                     const blob = await response.blob();
-                    const file = new File([blob], `ticket_${transNumber}.png`, { type: 'image/png' });
+                    const file = new File([blob], `idj_${transNumber}.png`, { type: 'image/png' });
                     
                     if (navigator.share) {
                         await navigator.share({
                             files: [file],
-                            title: `Ticket ${transNumber}`,
-                            text: 'Ticket System'
+                            title: `IDJ ${transNumber}`,
+                            text: 'IDJ System'
                         });
                     } else {
                         const link = document.createElement('a');
                         link.href = imageUrl;
-                        link.download = `ticket_${transNumber}.png`;
+                        link.download = `idj_${transNumber}.png`;
                         document.body.appendChild(link);
                         link.click();
                         document.body.removeChild(link);
@@ -1233,17 +1233,17 @@
             if (modal) modal.remove();
         }
 
-        async function generateAndShowTicket(ticketData, isMulti = false) {
+        async function generateAndShowIDJ(idjData, isMulti = false) {
             try {
-                showStatus('Generating ticket...', 'info');
+                showStatus('Generating IDJ...', 'info');
                 
-                displayTicketPreview(ticketData, isMulti);
+                displayIDJPreview(idjData, isMulti);
                 
-                const imageUrl = await generateTicketImage(ticketData, isMulti);
+                const imageUrl = await generateIDJImage(idjData, isMulti);
                 
-                showPrintModal(imageUrl, ticketData.trans);
+                showPrintModal(imageUrl, idjData.trans);
                 
-                showStatus('Ticket ready!', 'success');
+                showStatus('IDJ ready!', 'success');
                 
             } catch (error) {
                 console.error('Error:', error);
@@ -1313,8 +1313,8 @@
             
             if (!validateSingleForm()) return;
             
-            const ticketData = generateTicketData();
-            await generateAndShowTicket(ticketData, false);
+            const idjData = generateIDJData();
+            await generateAndShowIDJ(idjData, false);
         });
 
         generateMultiBtn.addEventListener('click', async function() {
@@ -1330,14 +1330,14 @@
                 return;
             }
             
-            const ticketData = generateMultiTicketData();
-            await generateAndShowTicket(ticketData, true);
+            const idjData = generateMultiIDJData();
+            await generateAndShowIDJ(idjData, true);
         });
 
         resetBtn.addEventListener('click', function() {
             if (confirm('Reset all form fields?')) {
                 ticketForm.reset();
-                ticketPreview.innerHTML = '<p class="preview-placeholder">Ticket image will appear here</p>';
+                ticketPreview.innerHTML = '<p class="preview-placeholder">IDJ image will appear here</p>';
                 descriptionInput.focus();
                 printStatus.style.display = 'none';
                 saveDataToLocalStorage();
@@ -1349,7 +1349,7 @@
                 productsContainer.innerHTML = createProductItem(0);
                 multiCustomDateInput.value = '';
                 multiCustomTimeInput.value = '';
-                ticketPreview.innerHTML = '<p class="preview-placeholder">Ticket image will appear here</p>';
+                ticketPreview.innerHTML = '<p class="preview-placeholder">IDJ image will appear here</p>';
                 printStatus.style.display = 'none';
                 
                 const inputs = document.querySelectorAll('.product-item input');
@@ -1405,8 +1405,8 @@
                 if (!mccInput.value) mccInput.value = generateRandomMCC();
                 if (!itemNumberInput.value) itemNumberInput.value = generateRandomItemNumber();
                 
-                const ticketData = generateTicketData();
-                displayTicketPreview(ticketData, false);
+                const idjData = generateIDJData();
+                displayIDJPreview(idjData, false);
             } else {
                 const { products, totalSubtotal } = collectMultiProductData();
                 
@@ -1414,8 +1414,8 @@
                     return;
                 }
                 
-                const ticketData = generateMultiTicketData();
-                displayTicketPreview(ticketData, true);
+                const idjData = generateMultiIDJData();
+                displayIDJPreview(idjData, true);
             }
         }
 
@@ -1430,7 +1430,7 @@
                     customTime: customTimeInput.value,
                     mode: 'single'
                 };
-                localStorage.setItem('ticketData', JSON.stringify(data));
+                localStorage.setItem('idjData', JSON.stringify(data));
             } else {
                 const products = [];
                 document.querySelectorAll('.product-item').forEach(item => {
@@ -1449,12 +1449,12 @@
                     multiCustomTime: multiCustomTimeInput.value,
                     mode: 'multi'
                 };
-                localStorage.setItem('ticketData', JSON.stringify(data));
+                localStorage.setItem('idjData', JSON.stringify(data));
             }
         }
 
         function loadSavedData() {
-            const savedData = localStorage.getItem('ticketData');
+            const savedData = localStorage.getItem('idjData');
             if (savedData) {
                 const data = JSON.parse(savedData);
                 
@@ -1548,7 +1548,7 @@
             
             window.addEventListener('beforeunload', saveDataToLocalStorage);
             
-            console.log('✅ Ticket System Ready');
+            console.log('✅ IDJ System Ready');
         }
 
         document.addEventListener('DOMContentLoaded', initApp);
