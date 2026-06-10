@@ -4,12 +4,11 @@
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Chicho Tickets">
-    <link rel="apple-touch-icon" href="Logo.jpeg">
+    <meta name="apple-mobile-web-app-title" content="TickesSol">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chicho's Anime Store - Ticket System</title>
-    <link rel="icon" href="Logo.jpeg" type="image/jpeg">
+    <title>TickesSol - Ticket System</title>
     <style>
         /* ===== RESET & BASE ===== */
         * {
@@ -511,8 +510,8 @@
     <!-- ===== LOGIN ===== -->
     <div id="loginScreen" class="login-screen">
         <div class="login-box">
-            <img src="Logo.jpeg" alt="Chicho's Anime Store" class="login-logo">
-            <h1 class="login-title">CHICHO'S ANIME STORE</h1>
+            
+            <h1 class="login-title">tickets System</h1>
             <p>Professional Ticket System</p>
             
             <input type="password" id="loginPassword" placeholder="🔐 Enter password" class="login-input">
@@ -527,8 +526,8 @@
     <div class="app-container" id="appContent">
         <div class="container">
             <header>
-                <img src="Logo.jpeg" alt="Business Logo" class="logo">
-                <h1>Chicho's Anime Store</h1>
+                
+                <h1>Tickets</h1>
                 <p class="subtitle">Professional Ticket System</p>
             </header>
 
@@ -629,7 +628,7 @@
             </main>
 
             <footer>
-                <p>Chicho's Anime Store &copy; 2024 | Professional POS System</p>
+                <p>TickesSol &copy; 2024 | Professional Ticket System</p>
             </footer>
         </div>
     </div>
@@ -1205,7 +1204,7 @@
                         await navigator.share({
                             files: [file],
                             title: `Ticket ${transNumber}`,
-                            text: 'Ticket from Chicho\'s Anime Store'
+                            text: 'Ticket System'
                         });
                     } else {
                         const link = document.createElement('a');
