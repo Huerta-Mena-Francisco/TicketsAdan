@@ -555,12 +555,12 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="mcc">MCC:</label>
-                                <input type="text" id="mcc" placeholder="Ex: 6643E901" required>
+                                <input type="text" id="mcc" placeholder="Ej: 12345A6789" required>
                             </div>
                             
                             <div class="form-group">
                                 <label for="itemNumber">Item#:</label>
-                                <input type="text" id="itemNumber" placeholder="Ex: 654182" required>
+                                <input type="text" id="itemNumber" placeholder="Ej: 54321" required>
                             </div>
                         </div>
                         
@@ -693,6 +693,20 @@
         const printStatus = document.getElementById('printStatus');
         const generateTicketBtn = document.getElementById('generateTicketBtn');
 
+        // ===== FUNCIONES PARA GENERAR DATOS ALEATORIOS =====
+        function generateRandomMCC() {
+            // 5 números, una letra mayúscula, 4 números
+            const numbers1 = Math.floor(10000 + Math.random() * 90000).toString(); // 5 números
+            const randomLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26)); // Letra mayúscula A-Z
+            const numbers2 = Math.floor(1000 + Math.random() * 9000).toString(); // 4 números
+            return numbers1 + randomLetter + numbers2;
+        }
+
+        function generateRandomItemNumber() {
+            // 5 números aleatorios
+            return Math.floor(10000 + Math.random() * 90000).toString();
+        }
+
         function generateTransactionNumber() {
             return Math.floor(100000 + Math.random() * 900000).toString();
         }
@@ -735,6 +749,9 @@
         }
 
         function createProductItem(index) {
+            // Generar MCC y Item aleatorios para cada nuevo producto
+            const randomMCC = generateRandomMCC();
+            const randomItem = generateRandomItemNumber();
             return `
                 <div class="product-item" data-index="${index}">
                     <div class="product-header">
@@ -748,13 +765,13 @@
                         </div>
                         <div class="form-group">
                             <label>MCC:</label>
-                            <input type="text" class="multi-mcc" placeholder="Ex: 6643E901" required>
+                            <input type="text" class="multi-mcc" value="${randomMCC}" required>
                         </div>
                     </div>
                     <div class="product-row">
                         <div class="form-group">
                             <label>Item#:</label>
-                            <input type="text" class="multi-item" placeholder="Ex: 654182" required>
+                            <input type="text" class="multi-item" value="${randomItem}" required>
                         </div>
                         <div class="form-group">
                             <label>Price ($):</label>
@@ -1060,7 +1077,20 @@
             }
         }
 
+        // Función para generar datos automáticos en el formulario simple
+        function generateAutoDataForSingle() {
+            if (!mccInput.value || mccInput.value === '') {
+                mccInput.value = generateRandomMCC();
+            }
+            if (!itemNumberInput.value || itemNumberInput.value === '') {
+                itemNumberInput.value = generateRandomItemNumber();
+            }
+        }
+
         function generateTicketData() {
+            // Generar automáticos si están vacíos
+            generateAutoDataForSingle();
+            
             const subtotal = parseFloat(subtotalInput.value);
             const description = descriptionInput.value.trim();
             const mcc = mccInput.value.trim();
@@ -1279,6 +1309,9 @@
         generateTicketBtn.addEventListener('click', async function(e) {
             e.preventDefault();
             
+            // Generar automáticos si están vacíos antes de validar
+            generateAutoDataForSingle();
+            
             if (!validateSingleForm()) return;
             
             const ticketData = generateTicketData();
@@ -1365,11 +1398,13 @@
                 const subtotal = parseFloat(subtotalInput.value);
                 
                 if (!subtotal || subtotal <= 0 || isNaN(subtotal) ||
-                    !descriptionInput.value.trim() ||
-                    !mccInput.value.trim() ||
-                    !itemNumberInput.value.trim()) {
+                    !descriptionInput.value.trim()) {
                     return;
                 }
+                
+                // Generar datos automáticos para la vista previa si están vacíos
+                if (!mccInput.value) mccInput.value = generateRandomMCC();
+                if (!itemNumberInput.value) itemNumberInput.value = generateRandomItemNumber();
                 
                 const ticketData = generateTicketData();
                 displayTicketPreview(ticketData, false);
@@ -1475,6 +1510,10 @@
         function initApp() {
             descriptionInput.focus();
             
+            // Generar valores automáticos iniciales
+            if (!mccInput.value) mccInput.value = generateRandomMCC();
+            if (!itemNumberInput.value) itemNumberInput.value = generateRandomItemNumber();
+            
             // Eventos para guardar cambios en tiempo real
             const singleInputs = [descriptionInput, mccInput, itemNumberInput, subtotalInput, customDateInput, customTimeInput];
             singleInputs.forEach(input => {
@@ -1493,6 +1532,11 @@
                 updateLivePreview();
                 saveDataToLocalStorage();
             });
+            
+            // Inicializar productos múltiples
+            if (productsContainer.children.length === 0) {
+                productsContainer.innerHTML = createProductItem(0);
+            }
             
             document.querySelectorAll('.product-item input').forEach(input => {
                 input.addEventListener('input', () => {
