@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tickessol-v1';
+const CACHE_NAME = 'IyDSJ-v1';
 const urlsToCache = [
   '/',
   '/Index.html',
