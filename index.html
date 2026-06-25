@@ -849,8 +849,12 @@
                             <span style="flex: 2; text-align: left;">${index + 1}. ${shortDesc}</span>
                             <span style="flex: 1; text-align: right;">${product.quantity} × $${product.price.toFixed(2)}</span>
                         </div>
-                        <div style="text-align: right; margin: 0 0 8px 0; font-size: 11px; border-bottom: 1px dotted #ccc; padding-bottom: 5px;">
-                            $${product.subtotal.toFixed(2)}
+                        <div style="margin: 0 0 8px 0; font-size: 9px; border-bottom: 1px dotted #ccc; padding-bottom: 5px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="color: #666;">MCC: ${product.mcc}</span>
+                                <span style="font-weight: bold;">$${product.subtotal.toFixed(2)}</span>
+                            </div>
+                            <div style="color: #666; text-align: left;">Item#: ${product.itemNumber}</div>
                         </div>
                     `;
                 });
@@ -966,32 +970,38 @@
                             <span>${index + 1}. ${shortDesc}</span>
                             <span>${product.quantity}×$${product.price.toFixed(2)}</span>
                         </div>
-                        <div class="product-subtotal">$${product.subtotal.toFixed(2)}</div>
+                        <div style="margin: 0 0 8px 0; font-size: 9px; border-bottom: 1px dotted #ccc; padding-bottom: 5px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="color: #555;">MCC: ${product.mcc}</span>
+                                <span style="font-weight: bold;">$${product.subtotal.toFixed(2)}</span>
+                            </div>
+                            <div style="color: #555; text-align: left;">Item#: ${product.itemNumber}</div>
+                        </div>
                     `;
                 });
                 
                 return `
                     <div class="idj">
                         <div class="idj-header">
-                            <div class="business-name">IDSJ</div>
+                            <div class="business-name">CHICHO'S ANIME STORE</div>
                             <div style="font-size: 12px; margin: 3px 0;">SALES RECEIPT</div>
                             <div style="font-size: 10px;">${idjData.dateTime}</div>
                         </div>
                         
                         <div class="separator-line"></div>
                         
-                        <div style="text-align: center; font-weight: bold; font-size: 12px; margin: 5px 0;">
+                        <div style="display: flex; justify-content: space-between; margin: 8px 0; font-weight: bold; font-size: 12px;">
+                            <span>Trans#:</span>
+                            <span>${idjData.trans}</span>
+                        </div>
+                        
+                        <div style="text-align: center; font-weight: bold; font-size: 12px; margin: 5px 0; padding-bottom: 6px; border-bottom: 1px solid #000;">
                             ${idjData.products.length} ITEMS (${itemCount} pcs)
                         </div>
                         
                         ${productsHTML}
                         
                         <div class="separator-line"></div>
-                        
-                        <div class="idj-row">
-                            <span>Transaction:</span>
-                            <span>${idjData.trans}</span>
-                        </div>
                         
                         <div class="idj-row">
                             <span>Sub-total:</span>
@@ -1020,23 +1030,23 @@
                 return `
                     <div class="idj">
                         <div class="idj-header">
-                            <div class="business-name">IDSJ</div>
+                            <div class="business-name">CHICHO'S ANIME STORE</div>
                             <div style="font-size: 12px; margin: 3px 0;">SALES RECEIPT</div>
                             <div style="font-size: 10px;">${idjData.dateTime}</div>
                         </div>
                         
                         <div class="separator-line"></div>
                         
+                        <div style="display: flex; justify-content: space-between; margin: 8px 0; font-weight: bold; font-size: 12px;">
+                            <span>Trans#:</span>
+                            <span>${idjData.trans}</span>
+                        </div>
+                        
                         <div style="text-align: center; font-weight: bold; font-size: 12px; margin: 5px 0;">
                             ${idjData.description}
                         </div>
                         
                         <div class="separator-line"></div>
-                        
-                        <div class="idj-row">
-                            <span>Transaction:</span>
-                            <span>${idjData.trans}</span>
-                        </div>
                         
                         <div class="idj-row">
                             <span>MCC:</span>
