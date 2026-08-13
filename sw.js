@@ -1,10 +1,10 @@
 const CACHE_NAME = 'IyDSJ-v1';
 const urlsToCache = [
-  '/',
-  '/Index.html',
-  '/style.css',
-  '/script.js',
-  '/manifest.json'
+  '/TicketsAdan/Index.html',
+  '/TicketsAdan/style.css',
+  '/TicketsAdan/script.js',
+  '/TicketsAdan/manifest.json',
+  '/TicketsAdan/Logo.jpeg'
 ];
 
 self.addEventListener('install', event => {
@@ -16,26 +16,32 @@ self.addEventListener('install', event => {
 });
 
 self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request)
-          .then(response => {
-            if (!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
-            const responseToCache = response.clone();
-            caches.open(CACHE_NAME)
-              .then(cache => {
-                cache.put(event.request, responseToCache);
-              });
+  // Solo responder a peticiones dentro de /TicketsAdan/
+  if (event.request.url.includes('/TicketsAdan/')) {
+    event.respondWith(
+      caches.match(event.request)
+        .then(response => {
+          if (response) {
             return response;
-          });
-      })
-  );
+          }
+          return fetch(event.request)
+            .then(response => {
+              if (!response || response.status !== 200 || response.type !== 'basic') {
+                return response;
+              }
+              const responseToCache = response.clone();
+              caches.open(CACHE_NAME)
+                .then(cache => {
+                  cache.put(event.request, responseToCache);
+                });
+              return response;
+            });
+        })
+    );
+  } else {
+    // Para otras páginas, no intervenir
+    event.respondWith(fetch(event.request));
+  }
 });
 
 self.addEventListener('activate', event => {
