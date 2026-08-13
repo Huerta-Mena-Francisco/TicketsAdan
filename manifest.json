@@ -3,6 +3,7 @@
   "short_name": "TickesSol",
   "description": "Sistema de tickets TickesSol",
   "start_url": "/Index.html",
+  "scope": "/TicketsAdan/",
   "display": "standalone",
   "theme_color": "#667eea",
   "background_color": "#ffffff",
